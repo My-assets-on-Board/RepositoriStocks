@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>RepositoriStocks</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="container">
+      <header class="topbar">
+        <div>
+          <p class="eyebrow">Portfolio overview</p>
+          <h1>RepositoriStocks</h1>
+        </div>
+        <div class="header-badge">Live mock data</div>
+      </header>
+
+      <main>
+        <section class="summary-grid">
+          <article class="card accent">
+            <p>Total value</p>
+            <h2 id="total-value">$0.00</h2>
+          </article>
+          <article class="card">
+            <p>Day change</p>
+            <h2 id="day-change">$0.00</h2>
+          </article>
+          <article class="card">
+            <p>Total gain/loss</p>
+            <h2 id="total-gain-loss">$0.00</h2>
+          </article>
+        </section>
+
+        <section class="panel">
+          <div class="panel-header">
+            <h3>Holdings</h3>
+            <div class="search-wrap">
+              <input id="search-input" type="text" placeholder="Search stocks..." aria-label="Search stocks" />
+            </div>
+          </div>
+
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Symbol</th>
+                  <th>Company</th>
+                  <th>Shares</th>
+                  <th>Avg. Cost</th>
+                  <th>Current Price</th>
+                  <th>Market Value</th>
+                  <th>Gain/Loss</th>
+                </tr>
+              </thead>
+              <tbody id="holdings-body"></tbody>
+            </table>
+          </div>
+        </section>
+
+        <section class="panel add-form-panel">
+          <h3>Add a stock</h3>
+          <form id="stock-form" class="stock-form">
+            <label>
+              Symbol
+              <input id="symbol" name="symbol" type="text" maxlength="10" placeholder="AAPL" required />
+            </label>
+            <label>
+              Company
+              <input id="company" name="company" type="text" placeholder="Apple Inc." required />
+            </label>
+            <label>
+              Shares
+              <input id="shares" name="shares" type="number" min="1" step="1" placeholder="10" required />
+            </label>
+            <label>
+              Avg Cost
+              <input id="avgCost" name="avgCost" type="number" min="0" step="0.01" placeholder="180.50" required />
+            </label>
+            <label>
+              Current Price
+              <input id="currentPrice" name="currentPrice" type="number" min="0" step="0.01" placeholder="192.30" required />
+            </label>
+            <button type="submit">Add holding</button>
+          </form>
+        </section>
+      </main>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
