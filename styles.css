@@ -193,6 +193,20 @@ td {
   background: var(--primary-dark);
 }
 
+.remove-btn {
+  border: none;
+  background: rgba(217, 61, 61, 0.12);
+  color: var(--danger);
+  border-radius: 8px;
+  padding: 8px 10px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.remove-btn:hover {
+  background: rgba(217, 61, 61, 0.18);
+}
+
 @media (max-width: 640px) {
   .topbar,
   .panel-header {

@@ -41,7 +41,7 @@ function renderPortfolio(filterText = '') {
   let dayChange = 0;
 
   const rows = filteredHoldings.map((holding) => {
-    const { marketValue, investedValue, gainLoss } = getHoldingMetrics(holding);
+    const { marketValue, gainLoss } = getHoldingMetrics(holding);
     totalValue += marketValue;
     totalGainLoss += gainLoss;
     dayChange += (holding.currentPrice - holding.avgCost) * holding.shares * 0.15;
@@ -55,13 +55,14 @@ function renderPortfolio(filterText = '') {
         <td>${formatCurrency(holding.currentPrice)}</td>
         <td>${formatCurrency(marketValue)}</td>
         <td class="${gainLoss >= 0 ? 'positive' : 'negative'}">${formatCurrency(gainLoss)}</td>
+        <td><button class="remove-btn" data-symbol="${holding.symbol}" type="button">Remove</button></td>
       </tr>
     `;
   }).join('');
 
   holdingsBody.innerHTML = rows || `
     <tr>
-      <td colspan="7">No holdings match your search.</td>
+      <td colspan="8">No holdings match your search.</td>
     </tr>
   `;
 
@@ -72,8 +73,29 @@ function renderPortfolio(filterText = '') {
   dayChangeEl.className = dayChange >= 0 ? 'positive' : 'negative';
 }
 
+function removeHolding(symbol) {
+  const index = holdings.findIndex((holding) => holding.symbol.toUpperCase() === symbol.toUpperCase());
+
+  if (index === -1) {
+    return;
+  }
+
+  holdings.splice(index, 1);
+  renderPortfolio(searchInput.value);
+}
+
 searchInput.addEventListener('input', (event) => {
   renderPortfolio(event.target.value);
+});
+
+holdingsBody.addEventListener('click', (event) => {
+  const button = event.target.closest('.remove-btn');
+
+  if (!button) {
+    return;
+  }
+
+  removeHolding(button.dataset.symbol);
 });
 
 stockForm.addEventListener('submit', (event) => {
